@@ -1,0 +1,45 @@
+---
+title: '멀티 깃 계정 설정하기'
+date: 2023-10-30T10:00:00Z
+layout: PostSimple
+tags: ['git']
+draft: false
+---
+
+# Git local 계정 설정하기
+
+기본적으로 깃은 디렉토리 별로 계정을 설정 할 수 있고, 만약 전역 설정이 필요하면 `--global`을 붙이면 됩니다.  
+현재는 여러개의 깃 계정을 사용 할 것이므로 디렉토리 단위 깃 계정을 설정합니다.
+```bash
+git config user.name 'name'
+git config user.email 'name'
+```
+
+# Git ssh 설정하기
+
+만약 깃허브를 이용한다면 보통 ssh 인증을 통해 커밋 권한을 얻습니다.  
+우선 깃허브 개발자 설정에 접속하여 새로운 ssh 키를 생성하여 복사합니다.  
+그 다음 아래의 명령어를 입력하여 깃 계정에 대해 ssh 키를 설정합니다.  
+
+```bash
+vi ~/.git-credentials
+
+# 아래의 내용을 입력한 후 저장합니다
+https://[깃 계정]:[생성한 ssh 키]@github.com
+```
+
+미자막으로 깃에서 저장된 ssh 키를 사용하도록 설정을 변경합니다.  
+이렇게 하면 credential.username을 기반으로 .git-credentials 파일에서 ssh 키를 찾아서 인증하게 됩니다.
+
+```bash
+cd [소스 디렉토리로 이동]
+# .git-credentials 파일에 저장 할때 사용한 깃계정과 동일한 계정
+git config credential.username [깃 계정]
+# 저장된 ssh 키를 이용하여 인증
+git config credential.helper store
+```
+
+
+# 커밋해보기
+이제 커밋해보면 깃에서는 저장된 깃 계정을 이름으로 커밋을 하며 인증 정보를 기반으로 정상적으로 푸시 할 수 있습니다.
+
