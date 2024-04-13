@@ -43,3 +43,11 @@ git config credential.helper store
 # 커밋해보기
 
 이제 커밋해보면 깃에서는 저장된 깃 계정을 이름으로 커밋을 하며 인증 정보를 기반으로 정상적으로 푸시 할 수 있습니다.
+
+# 2024.04.13 Update
+
+credential.helper osxkeychain을 이용하여 인증하는 방식
+
+1. 깃허브 계정 별로 키체인을 생성한다.
+2. git global config에 credential.helper를 osxkeychain으로 설정한다.
+3. 각 디렉토리 별로 git config에 credential.name을 사용하고자 하는 깃허브 키체인의 이름으로 설정한다.
