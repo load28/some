@@ -25,7 +25,7 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        sans: ['GoormSansCode', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: colors.teal,
@@ -61,6 +61,7 @@ module.exports = {
             },
             pre: {
               backgroundColor: theme('colors.gray.800'),
+              fontFamily: 'GoormSansCode',
             },
             code: {
               color: theme('colors.pink.500'),
