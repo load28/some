@@ -96,6 +96,29 @@ class InvokeCommand : Command() {
 
 InvokeCommand는 Invoker 역할을 합니다. 이 클래스는 실제 커맨드 객체를 가지고 있으며, 클라이언트의 요청에 따라 해당 커맨드를 실행하거나 취소합니다.
 
+6. 테스트 코드
+
+```kotlin
+class CommandPatternTest {
+    @Test
+    fun testInvokeCommand() {
+        val invoker = InvokeCommand()
+
+        // 초기 상태 테스트 (NoCommand)
+        assertEquals("No command", invoker.execute())
+        assertEquals("No command", invoker.undo())
+
+        // Kimchi 커맨드 설정 및 테스트
+        val kimchi = Kimchi()
+        val kimchiCommand = CommandKimchi(kimchi)
+        invoker.setCommend(kimchiCommand)
+
+        assertEquals("Cook Kimchi", invoker.execute())
+        assertEquals("None", invoker.undo())
+    }
+}
+```
+
 ### 커맨드 패턴의 장점
 
 - **확장성:** 새로운 커맨드를 추가하기 쉽습니다.
