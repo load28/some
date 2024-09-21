@@ -143,10 +143,10 @@ EditTodoModal은 기존의 Todo 리스트를 수정할 수 있는 모달입니�
 
 ### 확장: Todo 카테고리 추가하기
 
-만약 생성/업데이트 모달에 카테고리 기능을 추가해야 한다면, 기존의 구조를 크게 변경하지 않고도 쉽게 확장할 수 있습니다.
+만약 생성 모달만 카테고리 기능을 추가해야 한다면, 기존의 구조를 크게 변경하지 않고도 쉽게 확장할 수 있습니다.
 
 1. 공통 UI 컴포넌트로 CategorySelector를 추가합니다.
-2. 이를 CreateTodoModal과 EditTodoModal에 각각 넣어줍니다.
+2. 이를 CreateTodoModal 넣어줍니다.
 
 ```typescript
 // 공통 컴포넌트: CategorySelector.tsx
@@ -201,35 +201,4 @@ export const CreateTodoModal = () => {
 }
 ```
 
-```typescript
-// EditTodoModal.tsx
-export const EditTodoModal = ({ todos }: { todos: string[] }) => {
-  const ctx = useSaveTodoDataContext()
-  const modalCtx = useModalControlContext()
-  const [cacheTodos, setCacheTodos] = useState<string[]>(todos)
-  const [category, setCategory] = useState<string>('')
-
-  return (
-    <>
-      {ctx && (
-        <Modal
-          opened={modalCtx?.opened || false}
-          onClose={() => {
-            modalCtx?.close()
-          }}
-          title="Edit todo"
-        >
-          <Stack>
-            <SaveTodo.Date date={ctx.date} setDate={ctx.setDate} />
-            <SaveTodo.Todos todos={cacheTodos} setTodos={setCacheTodos} />
-            <CategorySelector category={category} setCategory={setCategory} />
-            <Button>Edit</Button>
-          </Stack>
-        </Modal>
-      )}
-    </>
-  )
-}
-```
-
-위와 같은 설계를 통해 생성 모달과 업데이트 모달 간의 코드 중복을 최소화하면서도 각각의 비즈니스 로직을 독립적으로 유지할 수 있습니다. 또한, 공통 UI 컴포넌트를 재사용함으로써 유연한 확장성을 확보할 수 있습니다. 카테고리 기능과 같은 새로운 기능을 추가할 때도 기존 구조를 크게 변경하지 않고도 쉽게 기능을 확장할 수 있습니다.
+위와 같은 설계를 통해 생성 모달과 업데이트 모달 간의 코드 중복을 최소화하면서도 각각의 비즈니스 로직을 독립적으로 유지할 수 있습니다.
